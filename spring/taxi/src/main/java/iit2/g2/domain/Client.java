@@ -1,5 +1,6 @@
 package iit2.g2.domain;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "client")
-public class Client {
+public class Client implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +33,7 @@ public class Client {
 
 	@NotNull
 	@Column(name = "tel", nullable = false)
-	private Integer tel;
+	private String tel;
 
 	@Column(name = "email")
 	private String email;
@@ -92,7 +93,7 @@ public class Client {
 	/**
 	 * @return the tel
 	 */
-	public Integer getTel() {
+	public String getTel() {
 		return tel;
 	}
 
@@ -100,7 +101,7 @@ public class Client {
 	 * @param tel
 	 *            the tel to set
 	 */
-	public void setTel(Integer tel) {
+	public void setTel(String tel) {
 		this.tel = tel;
 	}
 

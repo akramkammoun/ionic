@@ -25,7 +25,7 @@ export class ClientPage implements OnInit {
     this.loadAll();
   }
 
-  loadAll(){
+  loadAll() {
     this.clientService.findClients().subscribe((clients: HttpResponse<Client[]>) => {
 
       this.clients = clients.body;
@@ -49,7 +49,7 @@ export class ClientPage implements OnInit {
   deleteClient(id: number) {
     const confirm = this.alertCtrl.create({
       title: 'Delete Client',
-      message: 'Do you agree to delete',
+      message: 'Do you agree to delete client: ' + id,
       buttons: [
         {
           text: 'Disagree',
@@ -63,13 +63,12 @@ export class ClientPage implements OnInit {
 
             this.clientService.deleteClient(id).subscribe((response) => {
 
-            //   console.log(result);
-            //   const toast = this.toastCtrl.create({
-            //     message: 'Le client est supprimé: ' + id,
-            //     duration: 3000
-            //   });
-            //   toast.present();
-            //   // this.loadAll();
+              this.clients = this.clients.filter((client: Client) => client.id != id);
+              const toast = this.toastCtrl.create({
+                message: 'Le client est supprimé: ' + id,
+                duration: 3000
+              });
+              toast.present();
             });
           }
         }
